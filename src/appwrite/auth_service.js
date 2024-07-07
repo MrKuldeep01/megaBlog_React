@@ -48,7 +48,7 @@ export class AuthService {
     }
   }
 
-  async getCurrentUser({email,password}){
+  async getCurrentUser(){
     try {
       return this.account.get();
     } catch (error) {

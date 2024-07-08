@@ -7,7 +7,6 @@ import dbService from "./appwrite/DB_service";
 import server from "../store/store";
 import { logout } from "../store/authSlice";
 import { Outlet } from "react-router-dom";
-// import {login,logout} from
 import { Header, Footer } from "./components";
 function App() {
   const [loading, setLoading] = useState(true);
@@ -29,18 +28,22 @@ function App() {
   }, []);
 
   return !loading ? (
-    <div className="min-h-screen bg-slate-800/20 text-white flex flex-wrap items-center justify-start">
-      <div className="w-full block ">
+    <div className="min-h-screen w-[100vw] bg-slate-800/50 text-white flex flex-wrap items-center justify-start">
+      <div className="w-full block P-2 ">
         <Header />
-        <main>TODO:{/* <Outlet/> */}</main>
-        <Footer />
+        <main>
+          TODO: {/* <Outlet /> */}
+          Data will shown here!
+
+        </main>
+        <Footer /> 
       </div>
     </div>
   ) : (
-      <div className="min-h-screen w-full bg-slate-800/20 text-white flex flex-wrap items-center justify-center">
-      <div className="w-52 block rounded-full border-12 border-black text-4xl">
+      <div className="min-h-screen w-[100vw] bg-slate-800/50 text-white flex flex-wrap items-center justify-center">
+      <div className="w-72 h-72 block m-auto rounded-full border-12 bg-white text-red-600 text-4xl overflow-hidden">
       Loading ...
-      </div>kjno
+      </div>
     </div>
   );
 }

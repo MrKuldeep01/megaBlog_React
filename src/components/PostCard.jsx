@@ -2,11 +2,20 @@ import React from 'react'
 import appwriteService from '../appwrite/DB_service'
 import { Link } from 'react-router-dom'
 
-const PostCard = () => {
+const PostCard = ({
+  $id,title,featuredImage
+}) => {
+
   return (
-    <div>
+    <Link to={`/post/${$id}`} className='w-full'>
+      <div className='w-full bg-gray-100 rounded-xl p-4'>
+        <div className='w-full flex justify-center mb-4'>
+          <img src={appwriteService.getFilePreview(featuredImage)} alt={title} className='rounded-lg' />
+        </div>
+        <h2 className='text-2xl font-semibold '>{title}</h2>
+      </div>
         
-    </div>
+    </Link>
   )
 }
 

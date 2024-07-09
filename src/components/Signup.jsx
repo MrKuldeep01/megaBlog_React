@@ -1,33 +1,32 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { login as authLogin } from "../../store/authSlice";
-import { Button, Input, Logo } from "./index";
-import { useDispatch } from "react-redux";
+import { login } from "../../store/authSlice";
 import authService from "../appwrite/auth_service";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Input, Logo } from "./index";
 import { useForm } from "react-hook-form";
-const Login = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
-  const [error, setError] = useState("");
+import { useDispatch } from "react-redux";
 
-  const submitHandler = async (data) => {
+const Signup = () => {
+  const dispatch = useDispatch();
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  async function submitHandler(data) {
     setError("");
     try {
-      console.log(data);
-      const session = await authService.login(data);
-      if (session) {
-        const userData = authService.getCurrentUser();
-        if (userData) {
-          dispatch(authLogin(userData));
-          console.log(userData);
+      const user = await authService.createAccount(data);
+      if (user) {
+        const currentUser = await authService.getCurrentUser();
+        if (currentUser) {
+          dispatch(login((userData = currentUser)));
           navigate("/");
         }
       }
     } catch (error) {
       setError(error.message);
     }
-  };
+  }
+
   return (
     <div className="flex items-center justify-center w-full">
       <div
@@ -38,12 +37,12 @@ const Login = () => {
             <Logo />
           </span>
         </div>
-        <h2 className="text-cente text-2xl font-semibold"> Sign in </h2>
+        <h2 className="text-cente text-2xl font-semibold"> Sign up </h2>
         <Link
-          to="/signup"
+          to="/login"
           className="font-medium transition-all duration-200 hover:underline mt-2 text-primary text-black/60"
         >
-          register if new
+          Login if have an account
         </Link>
         {error && (
           <p className="errorMessage px-4 py-2 text-red-700 font-semibold text-center">
@@ -55,6 +54,7 @@ const Login = () => {
           onSubmit={handleSubmit(submitHandler)}
           className="mt-8"
         >
+            <Input type="text" placeholder="full name please " label="Name : " {...register("name",{required:true})} />
           <Input
             type="email"
             placeholder="email"
@@ -78,11 +78,11 @@ const Login = () => {
               minLength: 6 || "password must have atleast 6 digits!",
             })}
           />
-          <Button children="Submit" type="submit" className="w-full" />
+          <Button children="Create Account" type="submit" className="w-full" />
         </form>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Signup;

@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { Input, Button, SelectBtn, RTE } from "../index";
 import appwriteService from "../../appwrite/DB_service";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const PostForm = ({ post }) => {
+const PostForm = ({ post = null }) => {
+  const userData = useSelector((state) => state.auth.userData);
   const navigate = useNavigate();
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
@@ -16,11 +17,10 @@ const PostForm = ({ post }) => {
         status: post?.status || "active",
       },
     });
-  const userData = useSelector((state) => state.user.userData);
 
   const submitHandler = async (data) => {
     if (post) {
-      const file = data.image[0]
+      const file = (await data.image[0])
         ? appwriteService.uploadFile(data.image[0])
         : null;
       if (file) {
@@ -51,8 +51,28 @@ const PostForm = ({ post }) => {
     }
   };
 
+  const createSlug = useCallback((value) => {
+    if (value && typeof value == "string") {
+      return value
+        .trim()
+        .toLowerCase()
+        .replace(/^[a-zA-Z\d]+/g, "-");
+    } else {
+      return "";
+    }
+  }, []);
 
-  
+  useEffect(() => {
+    const subscription = watch((value, { name }) => {
+      if (name === "title") {
+        setValue("slug", createSlug(value.title,{shouldValidate:true}));
+      }
+    });
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [watch, createSlug, setValue]);
+
   return <div></div>;
 };
 

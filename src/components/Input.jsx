@@ -1,6 +1,6 @@
 import React, { forwardRef, useId } from "react";
 
-const input = forwardRef(
+const Input = forwardRef(
   (
     { label, className = "px-4 py-2 rounded-md", type = "text", ...props },
     ref

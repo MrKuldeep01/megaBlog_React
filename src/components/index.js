@@ -8,6 +8,8 @@ import Button from "./Button";
 import SelectBtn from "./Select";
 import Login from "./Login";
 import Signup from "./Signup";
+import RTE from "./RTE";
+
 
 export {
   Header,
@@ -19,5 +21,5 @@ export {
   Button,
   SelectBtn,
   Login,
-  Signup,
+  Signup,RTE
 };

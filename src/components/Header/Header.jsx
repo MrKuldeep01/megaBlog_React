@@ -4,8 +4,9 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Logout from "./Logout";
 const Header = () => {
-  const authStatus = useSelector((state) => state.auth.status);
+  const authStatus = useSelector((state) => state.status);
   const navigate = useNavigate();
+  console.log("status is : "+ authStatus);
 
   const navItems = [
     {
@@ -35,7 +36,7 @@ const Header = () => {
     },
   ];
   return (
-    <header className="py-2 px-4 shadow bg-gray-500">
+    <header className="p-4 shadow bg-gray-500">
       <div className="container">
         <nav className="flex">
           <div className="logo">
@@ -43,13 +44,13 @@ const Header = () => {
               <Logo />
             </Link>
           </div>
-          <ul className="flex ml-auto ">
+          <ul className="flex ml-auto items-center ">
             {navItems.map((navItem) =>
               navItem.isActive ? (
-                <li key={navItem.name}>
+                <li key={navItem.name} className="px-2 py-1">
                   <button
                     onClick={() => navigate(navItem.url)}
-                    className="px-6 py-2 bg-black/60 text-white duration-200 hover:bg-black rounded"
+                    className="px-4 py-2 bg-black/80 text-white duration-200 hover:bg-black rounded-lg"
                   >
                     {navItem.name}
                   </button>
@@ -64,7 +65,6 @@ const Header = () => {
             )}
           </ul>
         </nav>
-        {/* <Logo/>    */}
       </div>
     </header>
   );

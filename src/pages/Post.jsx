@@ -1,4 +1,4 @@
-import { appwriteService } from "../appwrite/DB_service";
+import appwriteService  from "../appwrite/DB_service";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Container } from "../components";

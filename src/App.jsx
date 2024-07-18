@@ -31,7 +31,7 @@ function App() {
     <div className="min-h-screen w-[100vw] bg-slate-800/50 text-white flex flex-wrap items-center justify-start">
       <div className="w-full block P-2 ">
         <Header />
-        <main>
+        <main className="py-8 px-4">
           TODO: {/* <Outlet /> */}
           Data will shown here!
 
@@ -40,9 +40,11 @@ function App() {
       </div>
     </div>
   ) : (
-      <div className="min-h-screen w-[100vw] bg-slate-800/50 text-white flex flex-wrap items-center justify-center">
-      <div className="w-72 h-72 block m-auto rounded-full border-12 bg-white text-red-600 text-4xl overflow-hidden">
-      Loading ...
+      <div className="min-h-screen w-[100vw] bg-slate-900 text-4xl flex  items-center justify-center">
+      <div className="w-72 h-72 flex  items-center justify-center rounded-full border-dotted p-4 border-white border-8 bg-transparent font-semibold text-red-600 overflow-hidden animate-bounce ease-in-out delay-200 duration-1000">
+      <span className="animate-pulse ease-in-out delay-0 duration-800  ">
+          Loading ...
+        </span>
       </div>
     </div>
   );

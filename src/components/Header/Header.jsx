@@ -47,14 +47,13 @@ const Header = () => {
           <ul className="flex ml-auto items-center ">
             {navItems.map((navItem) =>
               navItem.isActive ? (
-                <li key={navItem.name} className="px-2 py-1">
+                <Link key={navItem.name} to={navItem.url} className="px-2 py-1">
                   <button
-                    onClick={() => navigate(navItem.url)}
                     className="px-4 py-2 bg-black/80 text-white duration-200 hover:bg-black rounded-lg"
                   >
                     {navItem.name}
                   </button>
-                </li>
+                </Link>
               ) : null
             )}
 

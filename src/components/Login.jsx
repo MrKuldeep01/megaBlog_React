@@ -31,29 +31,28 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center w-full">
       <div
-        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
+        className={`mx-auto w-full max-w-lg bg-zinc-800/90 rounded-xl p-10 border border-black/40  `}
       >
-        <div className="logo mb-2 flex justify-center">
-          <span className="max-w-[100px] inline-block w-full">
-            <Logo />
-          </span>
+         <div className="logo mb-2 flex justify-between items-center w-full">
+          <div className="left">
+            <h2 className="text-cente text-2xl font-semibold"> Sign in </h2>
+            <Link
+              to="/signup"
+              className="font-medium transition-all duration-200 hover:underline mt-2 text-primary text-blue-600/40"
+            >
+              Register if new 
+            </Link>
+          </div>
+          <Logo className="w-[80px]" />
         </div>
-        <h2 className="text-cente text-2xl font-semibold"> Sign in </h2>
-        <Link
-          to="/signup"
-          className="font-medium transition-all duration-200 hover:underline mt-2 text-primary text-black/60"
-        >
-          register if new
-        </Link>
         {error && (
           <p className="errorMessage px-4 py-2 text-red-700 font-semibold text-center">
             {error}
           </p>
         )}
-        <form
-          action="#"
+        <form          
           onSubmit={handleSubmit(submitHandler)}
-          className="mt-8"
+          className="mt-6 flex-col justify-center gap-2"
         >
           <Input
             type="email"
@@ -78,7 +77,7 @@ const Login = () => {
               minLength: 6 || "password must have atleast 6 digits!",
             })}
           />
-          <Button children="Submit" type="submit" className="w-full" />
+          <Button children="Submit" type="submit" className="w-full my-4" />
         </form>
       </div>
     </div>

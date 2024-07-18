@@ -7,9 +7,10 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
 const Signup = () => {
+  const {register,handleSubmit,} = useForm()
   const dispatch = useDispatch();
-  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   async function submitHandler(data) {
     setError("");
@@ -30,7 +31,7 @@ const Signup = () => {
   return (
     <div className="flex items-center justify-center w-full">
       <div
-        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
+        className={`mx-auto w-full max-w-lg bg-slate-300 rounded-xl p-10 border border-black/40  `}
       >
         <div className="logo mb-2 flex justify-center">
           <span className="max-w-[100px] inline-block w-full">
@@ -50,9 +51,8 @@ const Signup = () => {
           </p>
         )}
         <form
-          action="#"
           onSubmit={handleSubmit(submitHandler)}
-          className="mt-8"
+          className="mt-6"
         >
             <Input type="text" placeholder="full name please " label="Name : " {...register("name",{required:true})} />
           <Input
@@ -62,10 +62,10 @@ const Signup = () => {
             {...register("email", {
               required: true,
               validate: {
-                matchPatern: (value) =>
+                matchPatern: (value) =>(
                   /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(
                     value
-                  ) || "please enter properly!",
+                  ) || "please enter properly!"),
               },
             })}
           />

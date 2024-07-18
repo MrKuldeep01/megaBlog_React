@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
-import config from "../config/envconfig";
 import "./App.css";
 import { useDispatch } from "react-redux";
 import authService from "./appwrite/auth_service";
-import dbService from "./appwrite/DB_service";
-import server from "../store/store";
-import { logout } from "../store/authSlice";
+import { logout,login } from "../store/authSlice";
 import { Outlet } from "react-router-dom";
 import { Header, Footer } from "./components";
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-
+// http://localhost:5173 
   useEffect(() => {
     authService
       .getCurrentUser()
@@ -32,10 +29,8 @@ function App() {
       <div className="w-full block P-2 ">
         <Header />
         <main className="py-8 px-4">
-          TODO: {/* <Outlet /> */}
-          Data will shown here!
-
-        </main>
+          <Outlet />
+          </main>
         <Footer /> 
       </div>
     </div>

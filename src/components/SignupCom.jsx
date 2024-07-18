@@ -17,9 +17,9 @@ const Signup = () => {
     try {
       const user = await authService.createAccount(data);
       if (user) {
-        const currentUser = await authService.getCurrentUser();
-        if (currentUser) {
-          dispatch(login((userData = currentUser)));
+        const userData = await authService.getCurrentUser();
+        if (userData) {
+          dispatch(login((userData)));
           navigate("/");
         }
       }
@@ -31,7 +31,7 @@ const Signup = () => {
   return (
     <div className="flex items-center justify-center w-full">
       <div
-        className={`mx-auto w-full max-w-lg bg-zinc-800/90 rounded-xl p-10 border border-black/40  `}
+        className={`mx-auto w-full max-w-lg bg-zinc-800/90 rounded-xl p-10 border border-black/40 `}
       >
         <div className="logo mb-2 flex justify-between items-center w-full">
           <div className="left">
@@ -73,7 +73,7 @@ const Signup = () => {
                   ) || "please enter properly!",
               },
             })}
-          />
+          />           
           <Input
             label="Password"
             type="password"

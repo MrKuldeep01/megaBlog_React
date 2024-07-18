@@ -6,10 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const PostForm = ({ post = null }) => {
-  const userData = useSelector((state) => state.auth.userData);
+  const userData = useSelector((state) => state.userData);
   const navigate = useNavigate();
-  const { register, handleSubmit, watch, setValue, control, getValues } =
-    useForm({
+  const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
       defaultValues: {
         title: post?.title || "",
         slug: post?.slug || "",
@@ -65,15 +64,15 @@ const PostForm = ({ post = null }) => {
   useEffect(() => {
     const subscription = watch((value, { name }) => {
         if (name === "title") {
-            setValue("slug", slugTransform(value.title), { shouldValidate: true });
+            setValue("slug", createSlug(value.title), { shouldValidate: true });
         }
     });
 
     return () => subscription.unsubscribe();
-}, [watch, slugTransform, setValue]);
+}, [watch, createSlug, setValue]);
 
 return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+    <form onSubmit={handleSubmit(submitHandler)} className="flex flex-wrap">
         <div className="w-2/3 px-2">
             <Input
                 label="Title :"
@@ -87,7 +86,7 @@ return (
                 className="mb-4"
                 {...register("slug", { required: true })}
                 onInput={(e) => {
-                    setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
+                    setValue("slug", createSlug(e.currentTarget.value), { shouldValidate: true });
                 }}
             />
             <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
@@ -109,7 +108,7 @@ return (
                     />
                 </div>
             )}
-            <Select
+            <SelectBtn
                 options={["active", "inactive"]}
                 label="Status"
                 className="mb-4"

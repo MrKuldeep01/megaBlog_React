@@ -8,9 +8,9 @@ const RTE = ({ name, control, label, defaultValue = "" }) => {
       {label && <label className="inline-block mb-1 pr-1">{label}</label>}
 
       <Controller
-        name={ name || "content"}
+        name={name || "content"}
         control={{ control }}
-        render={({ field: { onChange } }) =>(
+        render={({ field: { onChange } }) => (
           <Editor
             initialValue={defaultValue}
             init={{

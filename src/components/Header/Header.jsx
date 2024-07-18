@@ -38,8 +38,7 @@ const Header = () => {
   ];
   
   return (
-    <header className="px-4 py-2 shadow bg-gray-500">
-      <div className="container">
+    <header className="px-4 py-2 my-0 shadow bg-gray-500">
         <nav className="w-full flex items-center justify-between">
           <div className="logo">
             <Link to="/">
@@ -66,7 +65,6 @@ const Header = () => {
             )}
           </ul>
         </nav>
-      </div>
     </header>
   );
 };

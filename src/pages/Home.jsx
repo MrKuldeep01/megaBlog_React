@@ -20,8 +20,8 @@ const Home = () => {
       <div className="w-full p-4 mt-4 text-center">
         <Container>
           <div className="flex flex-wrap items-center">
-            <h2 className="text-4xl font-semibold px-4 py-2 rounded">
-              Login to read the posts
+            <h2 className="text-4xl text-center w-full font-sans font-bold px-4 py-2 rounded">
+              Nothing to see Create a post first .
             </h2>
           </div>
         </Container>

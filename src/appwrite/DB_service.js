@@ -12,7 +12,7 @@ export class dbService {
     this.databases = new Databases(this.client);
     this.bucket = new Storage(this.client);
   }
-  async createPost({ title, slug, content, featuredImage, status, userId }) {
+  async createPost({ title, slug, content, featuredimage, status, userid }) {
     try {
       return await this.databases.createDocument(
         config.appwriteDbId,
@@ -21,9 +21,9 @@ export class dbService {
         {
           title,
           content,
-          featuredImage,
+          featuredimage,
           status,
-          userId,
+          userid,
         }
       );
     } catch (error) {
@@ -31,7 +31,7 @@ export class dbService {
     }
   }
 
-  async updatePost(slug, { title, content, featuredImage, status }) {
+  async updatePost(slug, { title, content, featuredimage, status }) {
     try {
       return await this.databases.updateDocument(
         config.appwriteDbId,
@@ -40,7 +40,7 @@ export class dbService {
         {
           title,
           content,
-          featuredImage,
+          featuredimage,
           status,
         }
       );

@@ -24,12 +24,14 @@ const PostForm = ({ post }) => {
       const file = (await data.image[0])
         ? appwriteService.uploadFile(data.image[0])
         : null;
+        console.log("file in if :",file)
+
       if (file) {
-        appwriteService.deleteFile(post.featuredImage);
+        appwriteService.deleteFile(post.featuredimage);
       }
       const Post = await appwriteService.updatePost(post.$id, {
         ...data,
-        featuredImage: file ? file.$id : undefined,
+        featuredimage: file ? file.$id : undefined,
       });
       if (Post) {
         navigate(`/post/${Post.$id}`);
@@ -38,13 +40,14 @@ const PostForm = ({ post }) => {
       const file = data.image[0]
         ? await appwriteService.uploadFile(data.image[0])
         : null;
-        console.log("file :",file)
       if (file) {
         const fileid = file.$id;
-        data.featuredImage = fileid;
+        data.featuredimage = fileid;
+        console.log("data :",data)
+        data.userid= userData.$id;
+
         const dbpost = await appwriteService.createPost({
-          ...data,
-          userId: userData.$id,
+          ...data
         });
         if (dbpost) {
           navigate(`/post/${dbpost.$id}`);
@@ -114,7 +117,7 @@ const PostForm = ({ post }) => {
         {post && (
           <div className="w-full mb-4">
             <img
-              src={appwriteService.getFilePreview(post.featuredImage)}
+              src={appwriteService.getFilePreview(post.featuredimage)}
               alt={post.title}
               className="rounded-lg"
             />

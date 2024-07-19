@@ -3,7 +3,7 @@ import { Input, Button, SelectBtn, RTE } from "../index";
 import appwriteService from "../../appwrite/DB_service";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const PostForm = ({ post }) => {
   const userData = useSelector((state) => state.userData);
@@ -36,8 +36,9 @@ const PostForm = ({ post }) => {
       }
     } else {
       const file = data.image[0]
-        ? appwriteService.uploadFile(data.image[0])
+        ? await appwriteService.uploadFile(data.image[0])
         : null;
+        console.log("file :",file)
       if (file) {
         const fileid = file.$id;
         data.featuredImage = fileid;

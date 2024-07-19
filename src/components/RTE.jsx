@@ -3,10 +3,8 @@ import { Editor } from "@tinymce/tinymce-react";
 import { Controller } from "react-hook-form";
 import config from "../../config/envconfig";
 const RTE = ({ name, control, label, defaultValue = "" }) => {
-  console.log(" rte called");
   
   try {
-    console.log("try block");
     return (
       <div className="w-full">
         {label && <label className="inline-block mb-1 pr-1">{label}</label>}
@@ -55,7 +53,6 @@ const RTE = ({ name, control, label, defaultValue = "" }) => {
       </div>
     );
   } catch (error) {
-    console.log("catch block");
     return <p className="text-2xl font-bold text-red-600">{error}</p>;
   }
 };

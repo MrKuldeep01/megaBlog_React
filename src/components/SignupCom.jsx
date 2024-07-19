@@ -19,19 +19,19 @@ const Signup = () => {
       if (user) {
         const userData = await authService.getCurrentUser();
         if (userData) {
-          dispatch(login((userData)));
+          dispatch(login({ userData }));
           navigate("/");
         }
       }
     } catch (error) {
-      setError(error.message);    
+      setError(error.message);
     }
   }
 
   return (
     <div className="flex items-center justify-center w-full">
       <div
-        className={`mx-auto w-full max-w-lg bg-zinc-800/90 rounded-xl p-10 border border-black/40 `}
+        className={`mx-auto w-full max-w-lg bg-zinc-800/90 rounded-xl p-10 border border-black/40`}
       >
         <div className="logo mb-2 flex justify-between items-center w-full">
           <div className="left">
@@ -67,13 +67,13 @@ const Signup = () => {
             {...register("email", {
               required: true,
               validate: {
-                matchPatern: (value) =>
+                matchPatern: (value)=>(
                   /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(
                     value
-                  ) || "please enter properly!",
+                  ) || "please enter properly!"),
               },
             })}
-          />           
+          />
           <Input
             label="Password"
             type="password"

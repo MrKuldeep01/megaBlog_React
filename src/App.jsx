@@ -25,8 +25,9 @@ function App() {
         setLoading(false);
       });
   }, []);
-
-
+  async function abc(){
+  // return await appwriteService.getFilePreview()
+  }
   return !loading ? (
     <div className="min-h-screen w-[100vw] bg-slate-800/50 text-white flex flex-wrap items-center justify-start py-0">
       <div className="w-full block py-0">

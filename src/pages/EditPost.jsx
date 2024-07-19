@@ -11,7 +11,11 @@ const EditPost = () => {
     if (slug) {
       appwriteService
         .getPost(slug)
-        .then((post) => post && setPost(post))
+        .then((post) => {
+          if (post) {
+            setPost(post);
+          }
+        })
         .catch((err) =>
           console.log(
             "error occured in fetching post in :: EditPost :: getPost form appwrite DB service" +
@@ -21,18 +25,21 @@ const EditPost = () => {
     } else {
       navigate("/");
     }
-  },[slug,navigate]);
+  }, [slug, navigate]);
 
-  return
+  return (
     <div className="p-4">
       <Container>
-       { post && <h2 className=" text-center text-slate-900 px-4 py-2 rounded font-semibold text-4xl">  Edit Post </h2> }
-       <h2 className=" text-center text-slate-900 px-4 py-2 rounded font-semibold text-4xl">  Create Post </h2>
-        { post && <PostForm post={post} /> }
-        <PostForm /> 
+        {post && (
+          <h2 className=" text-center text-slate-900 px-4 py-2 rounded font-semibold text-4xl">
+            Edit Post
+          </h2>
+        )}
+        {post && <PostForm post={post} />}
+        <PostForm />
       </Container>
     </div>
-  
+  );
 };
 
 export default EditPost;

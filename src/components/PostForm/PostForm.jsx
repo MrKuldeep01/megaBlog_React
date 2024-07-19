@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-const PostForm = ({ post }) => {
+const PostForm =async ({ post }) => {
   const userData = useSelector((state) => state.userData);
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const PostForm = ({ post }) => {
       const file = (await data.image[0])
         ? appwriteService.uploadFile(data.image[0])
         : null;
-        console.log("file in if :",file)
+  
 
       if (file) {
         appwriteService.deleteFile(post.featuredimage);
@@ -43,7 +43,6 @@ const PostForm = ({ post }) => {
       if (file) {
         const fileid = file.$id;
         data.featuredimage = fileid;
-        console.log("data :",data)
         data.userid= userData.$id;
 
         const dbpost = await appwriteService.createPost({
@@ -63,7 +62,7 @@ const PostForm = ({ post }) => {
       return value
         .trim()
         .toLowerCase()
-        .replace(/[\sW]+/g, "-");
+        .replace(/[\sW]+/g, "-").substring(0,12);
     } else {
       return "";
     }
@@ -92,6 +91,7 @@ const PostForm = ({ post }) => {
           label="Slug :"
           placeholder="Slug"
           className="mb-4"
+          readOnly
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", createSlug(e.currentTarget.value), {
@@ -117,7 +117,7 @@ const PostForm = ({ post }) => {
         {post && (
           <div className="w-full mb-4">
             <img
-              src={appwriteService.getFilePreview(post.featuredimage)}
+              src={await appwriteService.getFilePreview(post.featuredimage)}
               alt={post.title}
               className="rounded-lg"
             />

@@ -5,8 +5,11 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const PostForm = ({ post = null }) => {
-  const userData = useSelector((state) => state.userData);
+const PostForm = ({ post }) => {
+  const userData = useSelector((state) => state.
+  userData);
+  console.log('userData :');
+  console.log(userData);
   const navigate = useNavigate();
 
   
@@ -52,12 +55,16 @@ const PostForm = ({ post = null }) => {
     }
   };
 
+        
+// regEx that is provided by video :  .replace(/^[a-zA-Z\d]+/g, "-");
+
   const createSlug = useCallback((value) => {
     if (value && typeof value == "string") {
       return value
         .trim()
         .toLowerCase()
-        .replace(/^[a-zA-Z\d]+/g, "-");
+        .replace(/[\sW]+/g, "-");
+
     } else {
       return "";
     }

@@ -6,14 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const PostForm = ({ post }) => {
-  const userData = useSelector((state) => state.
-  userData);
-  console.log('userData :');
-  console.log(userData);
+  const userData = useSelector((state) => state.userData);
   const navigate = useNavigate();
 
-  
-  const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
+  const { register, handleSubmit, watch, setValue, control, getValues } =
+    useForm({
       defaultValues: {
         title: post?.title || "",
         slug: post?.slug || "",
@@ -55,8 +52,7 @@ const PostForm = ({ post }) => {
     }
   };
 
-        
-// regEx that is provided by video :  .replace(/^[a-zA-Z\d]+/g, "-");
+  // regEx that is provided by video :  .replace(/^[a-zA-Z\d]+/g, "-");
 
   const createSlug = useCallback((value) => {
     if (value && typeof value == "string") {
@@ -64,7 +60,6 @@ const PostForm = ({ post }) => {
         .trim()
         .toLowerCase()
         .replace(/[\sW]+/g, "-");
-
     } else {
       return "";
     }
@@ -72,62 +67,73 @@ const PostForm = ({ post }) => {
 
   useEffect(() => {
     const subscription = watch((value, { name }) => {
-        if (name === "title") {
-            setValue("slug", createSlug(value.title), { shouldValidate: true });
-        }
+      if (name === "title") {
+        setValue("slug", createSlug(value.title), { shouldValidate: true });
+      }
     });
 
     return () => subscription.unsubscribe();
-}, [watch, createSlug, setValue]);
+  }, [watch, createSlug, setValue]);
 
-return (
+  return (
     <form onSubmit={handleSubmit(submitHandler)} className="flex flex-wrap">
-        <div className="w-2/3 px-2">
-            <Input
-                label="Title :"
-                placeholder="Title"
-                className="mb-4"
-                {...register("title", { required: true })}
+      <div className="w-2/3 px-2">
+        <Input
+          label="Title :"
+          placeholder="Title"
+          className="mb-4"
+          {...register("title", { required: true })}
+        />
+        <Input
+          label="Slug :"
+          placeholder="Slug"
+          className="mb-4"
+          {...register("slug", { required: true })}
+          onInput={(e) => {
+            setValue("slug", createSlug(e.currentTarget.value), {
+              shouldValidate: true,
+            });
+          }}
+        />
+        <RTE
+          label="Content :"
+          name="content"
+          control={control}
+          defaultValue={getValues("content")}
+        />
+      </div>
+      <div className="w-1/3 px-2">
+        <Input
+          label="Featured Image :"
+          type="file"
+          className="mb-4"
+          accept="image/png, image/jpg, image/jpeg, image/gif"
+          {...register("image", { required: !post })}
+        />
+        {post && (
+          <div className="w-full mb-4">
+            <img
+              src={appwriteService.getFilePreview(post.featuredImage)}
+              alt={post.title}
+              className="rounded-lg"
             />
-            <Input
-                label="Slug :"
-                placeholder="Slug"
-                className="mb-4"
-                {...register("slug", { required: true })}
-                onInput={(e) => {
-                    setValue("slug", createSlug(e.currentTarget.value), { shouldValidate: true });
-                }}
-            />
-            <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
-        </div>
-        <div className="w-1/3 px-2">
-            <Input
-                label="Featured Image :"
-                type="file"
-                className="mb-4"
-                accept="image/png, image/jpg, image/jpeg, image/gif"
-                {...register("image", { required: !post })}
-            />
-            {post && (
-                <div className="w-full mb-4">
-                    <img
-                        src={appwriteService.getFilePreview(post.featuredImage)}
-                        alt={post.title}
-                        className="rounded-lg"
-                    />
-                </div>
-            )}
-            <SelectBtn
-                options={["active", "inactive"]}
-                label="Status"
-                className="mb-4"
-                {...register("status", { required: true })}
-            />
-            <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
-                {post ? "Update" : "Submit"}
-            </Button>
-        </div>
+          </div>
+        )}
+        <SelectBtn
+          options={["active", "inactive"]}
+          label="Status"
+          className="mb-4"
+          {...register("status", { required: true })}
+        />
+        <Button
+          type="submit"
+          bgColor={post ? "bg-green-500" : undefined}
+          className="w-full"
+        >
+          {post ? "Update" : "Submit"}
+        </Button>
+      </div>
     </form>
-);
-}
-export default PostForm
+  );
+};
+export default PostForm;

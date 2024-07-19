@@ -7,8 +7,6 @@ import { isAction } from "@reduxjs/toolkit";
 const Header = () => {
   const authStatus = useSelector((state) => state.status);
   const navigate = useNavigate();
-  console.log("status is : "+ authStatus);
-
   const navItems = [
     {
       name: "Home",

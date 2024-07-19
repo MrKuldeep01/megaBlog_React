@@ -14,13 +14,12 @@ const Login = () => {
   const submitHandler = async (data) => {
     setError("");
     try {
-      console.log(data);
       const session = await authService.login(data);
       if (session) {
-        const userData = authService.getCurrentUser();
+        const userData = await authService.getCurrentUser();
         if (userData) {
-          dispatch(authLogin(userData));
           console.log(userData);
+          dispatch(authLogin(userData));
           navigate("/");
         }
       }
@@ -33,14 +32,14 @@ const Login = () => {
       <div
         className={`mx-auto w-full max-w-lg bg-zinc-800/90 rounded-xl p-10 border border-black/40  `}
       >
-         <div className="logo mb-2 flex justify-between items-center w-full">
+        <div className="logo mb-2 flex justify-between items-center w-full">
           <div className="left">
             <h2 className="text-cente text-2xl font-semibold"> Sign in </h2>
             <Link
               to="/signup"
               className="font-medium transition-all duration-200 hover:underline mt-2 text-primary text-blue-600/40"
             >
-              Register if new 
+              Register if new
             </Link>
           </div>
           <Logo className="w-[80px]" />
@@ -50,7 +49,7 @@ const Login = () => {
             {error}
           </p>
         )}
-        <form          
+        <form
           onSubmit={handleSubmit(submitHandler)}
           className="mt-6 flex-col justify-center gap-2"
         >

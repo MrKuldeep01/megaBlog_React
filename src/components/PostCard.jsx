@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 const PostCard = ({
   $id,title,featuredimage
 }) => {
-
+console.log('Post Card ::  run');
   return (
     <Link to={`/post/${$id}`} className='w-full'>
-      <div className='w-full bg-gray-100 rounded-xl p-4'>
+      <div className='w-full bg-gray-800/60 rounded-xl p-4'>
         <div className='w-full flex justify-center mb-4'>
           <img src={appwriteService.getFilePreview(featuredimage)} alt={title} className='rounded-lg' />
         </div>

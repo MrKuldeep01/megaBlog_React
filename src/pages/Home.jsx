@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, PostCard } from "../components";
 import appwriteService from "../appwrite/DB_service";
 const Home = () => {
+  console.log("Home:: run");
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     appwriteService
@@ -12,10 +13,10 @@ const Home = () => {
         }
       })
       .catch((err) =>
-        console.log("error occured in fetching posts :: Home.jsx :: pages")
+        console.log("error occured in fetching posts :: Home.jsx :: pages => ",err)
       );
-  });
-  if (posts.length == 0) {
+  },[]);
+  if (posts.length < 1) {
     return (
       <div className="w-full p-4 mt-4 text-center">
         <Container>

@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Input, Button, SelectBtn, RTE } from "../index";
 import appwriteService from "../../appwrite/DB_service";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-const PostForm =async ({ post }) => {
+const PostForm = ({ post }) => {
   const userData = useSelector((state) => state.userData);
   const navigate = useNavigate();
 
@@ -24,7 +24,6 @@ const PostForm =async ({ post }) => {
       const file = (await data.image[0])
         ? appwriteService.uploadFile(data.image[0])
         : null;
-  
 
       if (file) {
         appwriteService.deleteFile(post.featuredimage);
@@ -43,10 +42,10 @@ const PostForm =async ({ post }) => {
       if (file) {
         const fileid = file.$id;
         data.featuredimage = fileid;
-        data.userid= userData.$id;
+        data.userid = userData.$id;
 
         const dbpost = await appwriteService.createPost({
-          ...data
+          ...data,
         });
         if (dbpost) {
           navigate(`/post/${dbpost.$id}`);
@@ -62,7 +61,8 @@ const PostForm =async ({ post }) => {
       return value
         .trim()
         .toLowerCase()
-        .replace(/[\sW]+/g, "-").substring(0,12);
+        .replace(/[\sW]+/g, "-")
+        .substring(0, 12);
     } else {
       return "";
     }
@@ -77,6 +77,27 @@ const PostForm =async ({ post }) => {
 
     return () => subscription.unsubscribe();
   }, [watch, createSlug, setValue]);
+
+  // -------------------------
+
+  const [postImage, setPostImgae] = useState("");
+  if (post) {
+    console.log(post);
+    appwriteService
+      .getFilePreview(post.featuredimage)
+      .then((url) => {
+        if (url) {
+          setPostImgae(url.href);
+        } else {
+          console.log("url nhi milra!");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  postImage && console.log(postImage);
+  // ----------
 
   return (
     <form onSubmit={handleSubmit(submitHandler)} className="flex flex-wrap">
@@ -117,7 +138,7 @@ const PostForm =async ({ post }) => {
         {post && (
           <div className="w-full mb-4">
             <img
-              src={await appwriteService.getFilePreview(post.featuredimage)}
+              src={postImage || ""}
               alt={post.title}
               className="rounded-lg"
             />

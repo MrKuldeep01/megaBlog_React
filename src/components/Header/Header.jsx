@@ -1,9 +1,8 @@
 import React from "react";
-import { Logo, LogoutBtn, Container } from "../index";
+import { Logo, LogoutBtn } from "../index";
 import { useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import Logout from "./Logout";
-import { isAction } from "@reduxjs/toolkit";
+
 const Header = () => {
   const authStatus = useSelector((state) => state.status);
   const navigate = useNavigate();

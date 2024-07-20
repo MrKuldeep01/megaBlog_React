@@ -9,3 +9,4 @@
 - you have to destructure if it required 
 - complex equations must be handled outside the jsx return statements
 - sometimes the suggested solution on devTool lead big mistakes
+- sometimes we need to change the configuration of our bucketId's

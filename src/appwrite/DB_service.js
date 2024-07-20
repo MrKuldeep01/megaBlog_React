@@ -104,10 +104,7 @@ export class dbService {
 
   async deleteFile(fileId) {
     try {
-      await this.bucket.deleteFile(
-        config.appwriteBucket,
-        fileId
-      );
+      await this.bucket.deleteFile(config.appwriteBucket, fileId);
       return true;
     } catch (error) {
       console.log(error, "from delete file dbService appwrite");
@@ -117,13 +114,27 @@ export class dbService {
 
   async getFilePreview(fileId) {
     try {
-      return await this.bucket.getFilePreview(
-        config.appwriteBucket,
-        fileId
-      );
+      return await this.bucket.getFilePreview(config.appwriteBucket, fileId);
     } catch (error) {
       console.log(error, "from delete file dbService appwrite");
       return false;
+    }
+  }
+
+  async getFileDownload(fileId) {
+    try {
+      const result = await this.bucket.getFileDownload(
+        config.appwriteBucket,
+        fileId
+      );
+      // console.log(result); // Resource URL
+      if (result) {
+        return result;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.log(`error in getting download link :: db_service :: appwrite`);
     }
   }
 }

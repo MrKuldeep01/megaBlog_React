@@ -82,7 +82,6 @@ const PostForm = ({ post }) => {
 
   const [postImage, setPostImgae] = useState("");
   if (post) {
-    console.log(post);
     appwriteService
       .getFilePreview(post.featuredimage)
       .then((url) => {
@@ -96,7 +95,6 @@ const PostForm = ({ post }) => {
         console.log(err);
       });
   }
-  postImage && console.log(postImage);
   // ----------
 
   return (

@@ -16,7 +16,6 @@ const Post = () => {
       appwriteService
         .getPost(slug)
         .then(async (post) => {
-          
           if (post) {
             setPost(post);
           } else {
@@ -40,8 +39,6 @@ const Post = () => {
     });
   };
 
-
-  
   /*
  post is look like : {$collectionId
 : 
@@ -135,17 +132,15 @@ userid
 : 
 "669921e7002831c9a59d"}
 */
-  
 
-
-const [postImage, setPostImgae] = useState("");
+  const [postImage, setPostImgae] = useState("");
+  const [downloadLink,setDownloadLink] =useState("")
   if (post) {
     appwriteService
       .getFilePreview(post.featuredimage)
       .then((url) => {
         if (url) {
           setPostImgae(url.href);
-          
         } else {
           console.log("url nhi milra!");
         }
@@ -153,26 +148,25 @@ const [postImage, setPostImgae] = useState("");
       .catch((err) => {
         console.log(err);
       });
+    appwriteService
+      .getFileDownload(post.featuredimage)
+      .then((url) => setDownloadLink(url.href));
   }
 
   return post ? (
-    <div className="py-8">
+    <div className="my-3 p-2">
       <Container>
-        <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
-          <img
-            src={postImage || ""}
-            alt={post.title}
-            className="rounded-xl"
-          />
+        <div className="w-full flex justify-center mb-4 relative border rounded-xl py-2 px-0">
+         <Link to={downloadLink}> <img src={postImage || ""} alt={post.title} className="rounded-xl " title="Click to download..." /> </Link>
 
           {isAuther && (
-            <div className="absolute right-6 top-6">
+            <div className="absolute right-1 top-1 bg-black/20 backdrop:blur-2xl rounded-xl px-4 py-2">
               <Link to={`/edit-post/${post.$id}`}>
-                <Button bgColor="bg-green-500" className="mr-3">
+                <Button bgColor="bg-black/90" className="mr-3">
                   Edit
                 </Button>
               </Link>
-              <Button bgColor="bg-red-500" onClick={deletePost}>
+              <Button bgColor="bg-white/90" className="text-black" onClick={deletePost}>
                 Delete
               </Button>
             </div>

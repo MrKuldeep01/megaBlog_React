@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Container, PostCard } from "../components";
 import appwriteService from "../appwrite/DB_service";
 const Home = () => {
-  console.log("Home:: run");
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     appwriteService

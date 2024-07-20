@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import appwriteService from "../appwrite/DB_service";
 import { Link } from "react-router-dom";
 
-const PostCard = ({ $id, title, featuredimage }) => {
-  console.log("Post Card ::  run");
+const PostCard = ({ $id, title, featuredimage }) => { 
 
   // -------------------------
-console.log($id, title, featuredimage);
   const [postImage, setPostImgae] = useState(""); 
   if (featuredimage) {
     appwriteService

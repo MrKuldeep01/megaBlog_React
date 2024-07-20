@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Input, Button, SelectBtn, RTE } from "../index";
 import appwriteService from "../../appwrite/DB_service";
 import { useForm } from "react-hook-form";
@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const PostForm = ({ post }) => {
   const userData = useSelector((state) => state.userData);
   const navigate = useNavigate();
-
+const content = useRef(null)
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
       defaultValues: {
@@ -36,6 +36,7 @@ const PostForm = ({ post }) => {
         navigate(`/post/${Post.$id}`);
       }
     } else {
+      console.log(data);
       const file = data.image[0]
         ? await appwriteService.uploadFile(data.image[0])
         : null;
@@ -121,6 +122,7 @@ const PostForm = ({ post }) => {
         <RTE
           label="Content :"
           name="content"
+          {...register("content")}
           control={control}
           defaultValue={getValues("content")}
         />

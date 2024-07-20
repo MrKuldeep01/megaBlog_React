@@ -39,7 +39,7 @@ const Header = () => {
         <nav className="w-full flex items-center justify-between">
           <div className="logo">
             <Link to="/">
-              <Logo />
+              <Logo  className=" rounded-xl"/>
             </Link>
           </div>
           <ul className="flex ml-auto items-center ">

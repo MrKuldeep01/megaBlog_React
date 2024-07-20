@@ -41,7 +41,7 @@ const Login = () => {
               Register if new
             </Link>
           </div>
-          <Logo className="w-[80px]" />
+          <Logo className="w-20 rounded-3xl" />
         </div>
         {error && (
           <p className="errorMessage px-4 py-2 text-red-700 font-semibold text-center">

@@ -134,7 +134,7 @@ userid
 */
 
   const [postImage, setPostImgae] = useState("");
-  const [downloadLink,setDownloadLink] =useState("")
+  const [downloadLink, setDownloadLink] = useState("");
   if (post) {
     appwriteService
       .getFilePreview(post.featuredimage)
@@ -154,25 +154,37 @@ userid
   }
 
   return post ? (
-    <div className="my-3 p-2">
-      <Container>
-        <div className="w-full flex justify-center mb-4 relative border rounded-xl py-2 px-0">
-         <Link to={downloadLink}> <img src={postImage || ""} alt={post.title} className="rounded-xl " title="Click to download..." /> </Link>
+    <div className="my-3 p-2 flex items-center justify-center">
+      <Container className="w-1/2 overflow-hidden ">
+        <div className="w-full flex justify-center mb-4 relative border rounded-t-xl p-4 ">
+          <Link to={downloadLink} className="w-full">
+            <img
+              src={postImage || ""}
+              alt={post.title}
+              className="rounded-t-xl w-full h-full object-cover"
+              title="Click to download..."
+            />
+          </Link>
 
           {isAuther && (
-            <div className="absolute right-1 top-1 bg-black/20 backdrop:blur-2xl rounded-xl px-4 py-2">
+            <div className="absolute right-1 top-1 bg-black/20 backdrop-blur-lg  rounded-xl px-4 py-2">
               <Link to={`/edit-post/${post.$id}`}>
-                <Button bgColor="bg-black/90" className="mr-3">
+                <Button bgColor="bg-black" className="mr-3">
                   Edit
                 </Button>
               </Link>
-              <Button bgColor="bg-white/90" className="text-black" onClick={deletePost}>
+              <Button
+                bgColor="bg-white"
+                textColor="text-black"
+                className="font-semibold"
+                onClick={deletePost}
+              >
                 Delete
               </Button>
             </div>
           )}
         </div>
-        <div className="w-full mb-6">
+        <div className="w-full mb-6 p-2 rounded-b-xl backdrop-invert-0 border bg-white/10">
           <h1 className="text-2xl font-bold">{post.title}</h1>
         </div>
         <div className="browser-css">{parse(post.content)}</div>

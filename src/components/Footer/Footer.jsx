@@ -4,9 +4,9 @@ import Logo from "../Logo";
 
 function Footer() {
   return (
-    <section className="relative overflow-hidden py-10 w-full bg-gray-400 border border-t-2 border-t-black flex items-center justify-center ">
-      <div className="relative z-10 mx-auto max-w-7xl px-4">
-        <div className="-m-6 flex flex-wrap">
+    <section className="relative overflow-hidden px-2 py-10 w-full bg-gray-400 border border-t-2 border-t-black flex items-center justify-center ">
+      <div className="relative w-full z-10 mx-auto px-4">
+        <div className=" flex flex-wrap">
           <div className="w-full p-6 md:w-1/2 ">
             <div className="flex h-full flex-col justify-between">
               <div className="mb-4 inline-flex items-center">
@@ -22,40 +22,41 @@ function Footer() {
           <div className="w-full p-6 md:w-1/2 ">
             <div className="h-full">
               <h3 className="tracking-px mb-9  text-xs font-semibold uppercase text-gray-500">
-                Not a Company, but M enough!
+                Not a Company, but M enough!  
               </h3>
+              <h2 className="my-2  text-4xl font-serif font-semibold capitalize text-white w-full py-2 ">kuldeep kumar <i className="ri-map-pin-user-fill"></i></h2>
               <ul>
                 <li className="mb-4">
                   <Link
                     className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                    to="/"
+                    to="https://github.com/MrKuldeep01/megaBlog_React"
                   >
-                    Features
+                    GitHub <i className="ri-github-fill"></i>
+                  </Link>
+                </li>
+                
+                <li className="mb-4">
+                  <Link
+                    className=" text-base font-medium text-gray-900 hover:text-gray-700"
+                    to="https://www.linkedin.com/in/kuldeep-kumar-a4b71a258/"
+                  >
+                    LinkedIn <i className="ri-linkedin-box-fill"></i>
                   </Link>
                 </li>
                 <li className="mb-4">
                   <Link
                     className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                    to="/"
+                    to="mailto:kkharoliya20@gmail.com"
                   >
-                    Pricing
+                    Gmail <i className="ri-mail-send-line"></i>
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link
-                    className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                    to="/"
-                  >
-                    Affiliate Program
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                    to="/"
-                  >
-                    Press Kit
-                  </Link>
+                  <address
+                    className=" text-base sm:text-xl  font-semibold text-gray-900 hover:text-gray-700">
+                    Address <i className="ri-crosshair-2-line"></i> Rohtak, HARYANA (INDIA)
+                    
+                  </address>
                 </li>
               </ul>
             </div>

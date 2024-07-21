@@ -76,7 +76,7 @@ const Post = () => {
             <div className="absolute right-1 top-1 bg-black/20 backdrop-blur-lg  rounded-xl px-4 py-2">
               <Link to={`/edit-post/${post.$id}`}>
                 <Button bgColor="bg-black" className="mr-3">
-                  Edit
+                  Edit <i className="ri-tools-line"></i>
                 </Button>
               </Link>
               <Button
@@ -85,7 +85,7 @@ const Post = () => {
                 className="font-semibold"
                 onClick={deletePost}
               >
-                Delete
+                Delete <i className="ri-delete-bin-7-fill"></i>
               </Button>
             </div>
           )}

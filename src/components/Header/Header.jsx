@@ -23,31 +23,29 @@ const Header = () => {
       isActive: !authStatus,
     },
     {
-      name: "All Posts",
+      name: "Posts",
       url: "/all-posts",
       isActive: authStatus,
     },
     {
-      name: "Add Post",
+      name: "Post +",
       url: "/add-post",
       isActive: authStatus,
     },
   ];
   
   return (
-    <header className="px-4 py-2 my-0 shadow bg-gray-500">
-        <nav className="w-full flex items-center justify-between">
-          <div className="logo">
+    <header className="px-4 py-2 mt-0 shadow-xl bg-gray-600" >
+        <nav className="w-full flex items-center justify-between px-1">          
             <Link to="/">
               <Logo  className=" rounded-xl"/>
-            </Link>
-          </div>
+            </Link>          
           <ul className="flex ml-auto items-center ">
             {navItems.map((navItem) =>
               navItem.isActive ? (
                 <NavLink key={navItem.name} to={navItem.url} className={(isActive)=>(  "px-2 py-1")}>
                   <button
-                    className="px-4 py-2 bg-black/80 text-white duration-200 hover:bg-black rounded-lg"
+                    className="px-4 py-2 bg-black/80 text-white duration-200 hover:bg-black rounded-lg text-sm sm:text-base"
                   >
                     {navItem.name}
                   </button>

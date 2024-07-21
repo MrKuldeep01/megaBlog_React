@@ -61,7 +61,7 @@ const Post = () => {
 
   return post ? (
     <div className="my-3 p-2 flex items-center justify-center">
-      <Container className="w-1/2 overflow-hidden ">
+      <Container className="sm:w-1/2  w-[90vw] overflow-hidden ">
         <div className="w-full flex justify-center mb-4 relative border rounded-t-xl p-4 ">
           <Link to={downloadLink} className="w-full">
             <img

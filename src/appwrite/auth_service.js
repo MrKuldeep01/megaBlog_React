@@ -56,7 +56,7 @@ export class AuthService {
     try {
       return this.account.get();
     } catch (error) {
-      console.log("APPwrite authService getcurrent user : ", error);
+      console.log(" problem in APPwrite authService to :: getcurrent user : ", error);
     }
     return null;
   }

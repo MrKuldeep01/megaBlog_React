@@ -27,10 +27,10 @@ function App() {
   }, []);
   
   return !loading ? (
-    <div className="min-h-screen w-[100vw] bg-slate-800/50 text-white flex flex-wrap items-center justify-start py-0">
-      <div className="w-full block py-0">
+    <div className="w-full relative bg-slate-800/50 text-white flex flex-wrap items-center justify-start py-0">
+      <div className="w-full block p-0 m-0">
         <Header />
-        <main className="my-0 py-8 px-4 w-full h-auto min-h-8">
+        <main className="my-0 py-8 px-4 w-full h-auto min-h-[85vh]">
           <Outlet />
         </main>
         <Footer />

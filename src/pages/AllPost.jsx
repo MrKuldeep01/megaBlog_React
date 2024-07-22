@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 
 const AllPost = () => {
   const [posts, setPosts] = useState([]);
-  const [currentUser,setCurrentUser] = useState(null)
-const user = useSelector(state => state.userData)
+  const [currentUser, setCurrentUser] = useState(null);
+  const user = useSelector((state) => state.userData);
   useEffect(() => {
-        setCurrentUser(user)
+    setCurrentUser(user);
     appwriteService
       .listPosts()
       .then((posts) => posts && setPosts(posts.documents))
@@ -17,26 +17,25 @@ const user = useSelector(state => state.userData)
         console.log("error occured in fetching posts :: AllPost.jsx ::" + err)
       );
   }, []);
-  posts ? console.log(posts[0]) : null;
-  currentUser ? console.log(currentUser) : null;
+  const filteredPosts = posts.filter(post => post.userid === currentUser.$id);
   return (
     <div className="w-full p-4">
       <Container>
         <div className="flex flex-wrap gap-3 items-center justify-center">
-          {posts.length > 0 ? (
-            posts.map((post) => (post.userid === currentUser.$id )&&(
-              <div
-                className="w-[90vw] p-2 sm:w-1/2 md:w-1/3 lg:w-1/4"
-                key={post.$id}
-              >
-                <PostCard {...post} />
-              </div>
-            ))
-          ) : (
-            <h2 className="text-4xl text-center w-full font-sans font-bold px-4 py-2 rounded">
-              Nothing to see, Create post now 😇👑
-            </h2>
-          )}
+        {filteredPosts.length > 0 ? (
+        filteredPosts.map(post => (
+          <div
+            className="w-[90vw] p-2 sm:w-1/2 md:w-1/3 lg:w-1/4"
+            key={post.$id}
+          >
+            <PostCard {...post} />
+          </div>
+        ))
+      ) : (
+        <h2 className="text-4xl text-center w-full font-sans font-bold px-4 py-2 rounded">
+          No posts available, Create post now 😇👑
+        </h2>
+      )}
         </div>
       </Container>
     </div>

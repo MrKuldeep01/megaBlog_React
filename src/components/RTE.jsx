@@ -12,8 +12,10 @@ const RTE = ({ name, control, label, defaultValue = "",...props }) => {
         <Controller
           name={name || "content"}
           control={control}
+          defaultValue={defaultValue}
           render={({ field: { onChange } }) => ( 
             <Editor
+            {...props}
               initialValue={defaultValue}
               apiKey= {config.tinymcekey}
               init={{
@@ -46,7 +48,7 @@ const RTE = ({ name, control, label, defaultValue = "",...props }) => {
                 content_style:
                   "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
               }}
-              onEditorChange={onchange}
+              onEditorChange={onChange}
             />
           )}
         />

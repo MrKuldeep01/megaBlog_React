@@ -90,11 +90,10 @@ const Post = () => {
             </div>
           )}
         </div>
-        <div className="w-full mb-6 p-2 rounded-b-xl backdrop-invert-0 border bg-white/10 flex items-center justify-between">
-          <h1 className="text-2xl font-bold">{post.title}</h1>
-          <p className="text-xs text-gray-500 w-1/5"></p>
+        <div className="w-full mb-6 p-2 rounded-b-xl backdrop-invert-0 border bg-white/10 flex-col items-center justify-center">
+          <h1 className="text-4xl py-2 text-center font-bold border-b">{post.title}</h1>
+        <div className="browser-css py-2 px-2 ">{parse(post.content)}</div>
         </div>
-        <div className="browser-css">{parse(post.content)}</div>
       </Container>
     </div>
   ) : null;

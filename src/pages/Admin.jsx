@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Admin = () => {
   const user = useSelector((state) => state.userData);
   return user ? (
-    <div className="my-3 p-2 flex items-center justify-center">
+    <div className="w-full my-3 p-2 flex items-center justify-center">
       <Container className="sm:w-[80vw] w-[90vw] overflow-hidden ">
         <div className="w-full flex justify-center mb-4 relative rounded-md p-4 ">
           <img
@@ -29,15 +29,7 @@ const Admin = () => {
         </div>
       </Container>
     </div>
-  ) : (
-    <div className="min-h-screen w-[100vw] bg-slate-900 text-4xl flex  items-center justify-center">
-      <div className="w-72 h-72 flex  items-center justify-center rounded-full border-dotted p-4 border-white border-8 bg-transparent font-semibold text-red-600 overflow-hidden animate-bounce ease-in-out delay-200 duration-1000">
-        <span className="animate-pulse ease-in-out delay-0 duration-800  ">
-          Loading ...
-        </span>
-      </div>
-    </div>
-  );
+  ): null
 };
 
 export default Admin;

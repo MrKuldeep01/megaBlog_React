@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 const PostForm = ({ post }) => {
   const userData = useSelector((state) => state.userData);
   const navigate = useNavigate();
-const content = useRef(null)
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
       defaultValues: {
@@ -18,8 +17,8 @@ const content = useRef(null)
         status: post?.status || "active",
       },
     });
-
   const submitHandler = async (data) => {
+
     if (post) {
       const file = (await data.image[0])
         ? appwriteService.uploadFile(data.image[0])
@@ -36,7 +35,6 @@ const content = useRef(null)
         navigate(`/post/${Post.$id}`);
       }
     } else {
-      console.log(data);
       const file = data.image[0]
         ? await appwriteService.uploadFile(data.image[0])
         : null;
@@ -99,8 +97,11 @@ const content = useRef(null)
   // ----------
 
   return (
-    <form onSubmit={handleSubmit(submitHandler)} className="flex flex-wrap">
-      <div className="w-2/3 px-2">
+    <form
+      onSubmit={handleSubmit(submitHandler)}
+      className="flex-col flex-wrap sm:flex items-center sm:items-start justify-center gap:2 sm:gap-1 relative"
+    >
+      <div className="w-full sm:w-2/3 px-2">
         <Input
           label="Title :"
           placeholder="Title"
@@ -119,15 +120,17 @@ const content = useRef(null)
             });
           }}
         />
+      </div>
+      <div className="editor w-full block">
         <RTE
           label="Content :"
           name="content"
-          {...register("content")}
           control={control}
           defaultValue={getValues("content")}
         />
+        
       </div>
-      <div className="w-1/3 px-2">
+      <div className="w-full sm:w-1/3 px-2 sm:absolute top-0 right-0">
         <Input
           label="Featured Image :"
           type="file"
@@ -150,14 +153,16 @@ const content = useRef(null)
           className="mb-4"
           {...register("status", { required: true })}
         />
-        <Button
-          type="submit"
-          bgColor={post ? "bg-green-500" : undefined}
-          className="w-full"
-        >
-          {post ? "Update" : "Submit"}
-        </Button>
       </div>
+      <Button
+        type="submit"
+        bgColor={post ? "bg-green-500" : " bg-black"}
+        className="w-full my-4 duration-200 hover:scale-[1.01]"
+       
+        
+      >
+        {post ? "Update" : "Submit"}
+      </Button>
     </form>
   );
 };

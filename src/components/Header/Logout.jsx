@@ -12,7 +12,7 @@ const Logout = ({className=""}) => {
       }
     });
   };
-  return <button onClick={logoutHandler} className={` px-3 py-2 bg-black/70 text-white rounded-lg duration-200 hover:bg-black text-sm sm:text-base  ${className}`} title="Logout"> <i className="ri-logout-box-r-line"></i> </button>;
+  return <button onClick={logoutHandler} className={` px-3 py-2 bg-black/70 text-white rounded-lg duration-200 hover:bg-black text-sm sm:text-base  ${className}`} title="Logout">Logout <i className="ri-logout-box-r-line"></i> </button>;
 };
 
 export default Logout;

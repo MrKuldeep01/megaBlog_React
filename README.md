@@ -52,9 +52,62 @@ This project took approximately two weeks to complete, including around four nig
 
 This project is taught by Hitesh Sir on the YouTube channel "Chai aur Code" in the playlist "Chai aur React" as a major project.
 
+#### post data lool like : 
+```js
+{
+    "title": "At the end",
+    "content": "",
+    "featuredimage": "669de9e60019bc369d95",
+    "status": "active",
+    "userid": "669d6a49002b88119523",
+    "$id": "at-the-end",
+    "$tenant": "161677",
+    "$createdAt": "2024-07-22T05:11:07.621+00:00",
+    "$updatedAt": "2024-07-22T05:11:07.621+00:00",
+    "$permissions": [
+        "read(\"user:669d6a49002b88119523\")",
+        "update(\"user:669d6a49002b88119523\")",
+        "delete(\"user:669d6a49002b88119523\")"
+    ],
+    "$databaseId": "66863068000c2c478e26",
+    "$collectionId": "6686311b0009ccd8edfa"
+}
+```
 
- #### post is look like : 
 
+ #### user json is look like : 
+```js
+{
+    "$id": "669d6a49002b88119523",
+    "$createdAt": "2024-07-21T20:06:34.931+00:00",
+    "$updatedAt": "2024-07-21T20:06:34.931+00:00",
+    "name": "Kuldeep",
+    "registration": "2024-07-21T20:06:34.930+00:00",
+    "status": true,
+    "labels": [],
+    "passwordUpdate": "2024-07-21T20:06:34.930+00:00",
+    "email": "kuldeep@gmail.com",
+    "phone": "",
+    "emailVerification": false,
+    "phoneVerification": false,
+    "mfa": false,
+    "prefs": {},
+    "targets": [
+        {
+            "$id": "669d6a4aecdf5a6e9009",
+            "$createdAt": "2024-07-21T20:06:34.970+00:00",
+            "$updatedAt": "2024-07-21T20:06:34.970+00:00",
+            "name": "",
+            "userId": "669d6a49002b88119523",
+            "providerId": null,
+            "providerType": "email",
+            "identifier": "kuldeep@gmail.com"
+        }
+    ],
+    "accessedAt": "2024-07-21T20:06:34.930+00:00"
+}
+
+```
 
 ## Credits 🎖
 

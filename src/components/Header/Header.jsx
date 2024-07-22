@@ -9,47 +9,76 @@ const Header = () => {
   const [display, setDisplay] = useState(false);
   const navItems = [
     {
-      name: <i className="ri-home-office-line"></i>,
+      name: (
+        <span>
+          Home <i className="ri-home-office-line"></i>
+        </span>
+      ),
       url: "/",
-      title:"Home",
+      title: "Home",
       isActive: true,
     },
     {
-      name: <i className="ri-login-box-line"></i>,
+      name: (
+        <span>
+          Login <i className="ri-login-box-line"></i>{" "}
+        </span>
+      ),
       url: "/login",
       isActive: !authStatus,
-      title:"Login",
-
+      title: "Login",
     },
     {
-      name: <i className="ri-user-add-fill"></i>,
-      title:"Signup",
+      name: (
+        <span>
+          Signup <i className="ri-user-add-fill"></i>
+        </span>
+      ),
+      title: "Signup",
       url: "/signup",
       isActive: !authStatus,
     },
     {
-      name: <i className="ri-gallery-view-2"></i>,
-      title:"All Posts",
+      name: (
+        <span>
+          All posts <i className="ri-gallery-view-2"></i>
+        </span>
+      ),
+      title: "All Posts",
       url: "/all-posts",
       isActive: authStatus,
     },
     {
-      name: <i className="ri-sticky-note-add-line"></i>,
-      title:"Add Post",
+      name: (
+        <span>
+          Add post <i className="ri-sticky-note-add-line"></i>
+        </span>
+      ),
+      title: "Add Post",
       url: "/add-post",
+      isActive: authStatus,
+    },
+    {
+      name: (
+        <span>
+          Admin <i className="ri-map-pin-user-fill"></i>
+        </span>
+      ),
+      title: "Admin",
+      url: "/admin",
       isActive: authStatus,
     },
   ];
 
   return (
     <header className="px-4 py-2 mt-0 shadow-xl bg-gray-600 relative">
-      <nav
-        className="w-full flex items-center justify-between px-1"
-      >
+      <nav className="w-full flex items-center justify-between px-1">
         <Link to="/">
           <Logo className=" rounded-xl" />
         </Link>
+
         <ul className="flex ml-auto items-center ">
+          {/* ham btn =============== */}
           <Button
             className={`sm:hidden ${
               display ? "hidden" : "inline-block"
@@ -63,11 +92,11 @@ const Header = () => {
           />
 
           <div
-            className={`sm:hidden w-auto h-auto gap-1 justify-center items-center flex bg-white/10 absolute right-0 top-0 ${
+            className={`md:hidden w-auto h-auto gap-1 justify-center items-center flex bg-white/10 absolute right-0 top-0 ${
               display ? "flex-col" : "hidden"
-            } px-4 py-2 z-40`}
+            } px-4 py-2 z-40 rounded-l-lg`}
           >
-            {/* ham btn  */}
+            {/* close btn ========= */}
             <button
               className={`px-2 py-1 bg-white/40 text-black duration-200 hover:bg-white rounded text-xs sm:text-base absolute top-0 right-0 z-10
           `}
@@ -77,15 +106,16 @@ const Header = () => {
             >
               <i className="ri-close-line"></i>
             </button>
-{/* ham content */}
+
+            {/* ================== ham content */}
             {navItems.map((item, i) => {
               return item.isActive ? (
                 <Link to={item.url} key={i}>
-                  <button 
-                  title={item.title}
+                  <button
+                    title={item.title}
                     className={`${
                       i === 0 ? "mt-6" : ""
-                    }  px-4 py-2 bg-black/80 text-white duration-200 hover:bg-black rounded-lg text-sm sm:text-base`}
+                    }  px-4 py-2 bg-black/80 text-white duration-200 hover:bg-black rounded-lg text-sm md:text-base`}
                   >
                     {item.name}
                   </button>
@@ -105,10 +135,9 @@ const Header = () => {
                 key={i}
                 to={navItem.url}
                 title={navItem.title}
-
-                className={(isActive) => "hidden sm:inline-block px-2 py-1"}
+                className={(isActive) => "hidden md:inline-block px-2 py-1"}
               >
-                <button className="px-4 py-2 bg-black/80 text-white duration-200 hover:bg-black rounded-lg text-sm sm:text-base">
+                <button className="px-4 py-2 bg-black/80 text-white duration-200 hover:bg-black rounded-lg text-sm md:text-base">
                   {navItem.name}
                 </button>
               </NavLink>
@@ -117,7 +146,7 @@ const Header = () => {
 
           {authStatus && (
             <li>
-              <LogoutBtn className="hidden sm:inline-block" />
+              <LogoutBtn className="hidden md:inline-block" />
             </li>
           )}
         </ul>

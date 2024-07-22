@@ -61,7 +61,7 @@ const Post = () => {
 
   return post ? (
     <div className="my-3 p-2 flex items-center justify-center">
-      <Container className="sm:w-1/2  w-[90vw] overflow-hidden ">
+      <Container className="sm:w-[80vw] w-[90vw] overflow-hidden ">
         <div className="w-full flex justify-center mb-4 relative border rounded-t-xl p-4 ">
           <Link to={downloadLink} className="w-full">
             <img
@@ -90,8 +90,9 @@ const Post = () => {
             </div>
           )}
         </div>
-        <div className="w-full mb-6 p-2 rounded-b-xl backdrop-invert-0 border bg-white/10">
+        <div className="w-full mb-6 p-2 rounded-b-xl backdrop-invert-0 border bg-white/10 flex items-center justify-between">
           <h1 className="text-2xl font-bold">{post.title}</h1>
+          <p className="text-xs text-gray-500 w-1/5"></p>
         </div>
         <div className="browser-css">{parse(post.content)}</div>
       </Container>

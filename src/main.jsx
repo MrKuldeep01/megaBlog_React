@@ -13,6 +13,7 @@ import Signup from "./pages/Signup.jsx";
 import AllPosts from "./pages/AllPost.jsx";
 import AddPost from "./pages/AddPost.jsx";
 import EditPost from "./pages/EditPost.jsx";
+import Admin from "./pages/Admin.jsx";
 
 
 const router = createBrowserRouter([
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "/post/:slug",
         element: <Post />,
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
       },
     ],
   },

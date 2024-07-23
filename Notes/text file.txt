@@ -1,0 +1,4 @@
+text file 
+
+Blue screen of death 
+Blue Screen errors (also sometimes called black screen errors or STOP code errors) can occur if a serious problem causes Windows to shut down or restart unexpectedly. You might see a message that says, "Windows has been shut down to prevent damage to your computer" or a similar message.

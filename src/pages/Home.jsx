@@ -14,7 +14,6 @@ const Home = () => {
 
   useEffect(() => {
     status ? setIsLogin(status) : null;
-    
 
     appwriteService
       .listPosts()
@@ -26,6 +25,16 @@ const Home = () => {
       .catch((err) => setError(err));
   }, []);
 
+  //  //posts.map((post) => {
+  //  // try {
+  //    // appwriteService.deleteFile(post.slug);
+  //    // appwriteService.deletePost(post.$id);
+  //    // console.log("done everything clear now!")
+  //  // } catch (error) {
+  //    // console.error(error, " in deleting all files");
+  //  // }
+  //  //});
+  
   return (
     <div className="w-full p-4 relative">
       <Container>
@@ -41,7 +50,7 @@ const Home = () => {
             ))
           ) : (
             <h2 className="text-4xl text-center w-full font-sans font-bold px-4 py-2 rounded">
-              Nothing to see, {" "}
+              Nothing to see,{" "}
               {isLogin ? "Create post now 😇👑 " : "Login please 😇👑"}
             </h2>
           )}

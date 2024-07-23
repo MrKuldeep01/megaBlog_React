@@ -3,14 +3,14 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import authService from "./appwrite/auth_service";
 import { logout, login } from "../store/authSlice";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Header, Footer } from "./components";
 
 function App() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   // http://localhost:5173
-
+const navigate = useNavigate()
   useEffect(() => {
     authService
       .getCurrentUser()
@@ -19,6 +19,7 @@ function App() {
           dispatch(login({userData}));
         } else {
           dispatch(logout());
+          navigate('/login')
         }
       })
       .finally(() => {

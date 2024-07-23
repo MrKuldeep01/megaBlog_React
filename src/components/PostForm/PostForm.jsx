@@ -92,7 +92,6 @@ const PostForm = ({ post }) => {
       });
   }
   // ----------
-console.log("postform render");
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}

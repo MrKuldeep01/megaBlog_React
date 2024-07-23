@@ -16,16 +16,17 @@ const Admin = () => {
             title={`demo image for you ${user.name}😅`}
           />
         </div>
-        <div className="w-full mb-6 py-2 px-4 rounded-b-xl backdrop-invert-0  bg-white/10 flex-col items-center sm:justify-between justify-center sm:flex">
-          <h1 className="text-2xl text-center font-serif ">Hey, {user.name}</h1>
+        <div className="w-full mb-6 py-2 px-4 rounded-xl bg-white/10 flex-col items-center sm:justify-between justify-center sm:flex flex-wrap gap-2">
+          <h1 className="text-2xl text-center font-serif w-auto">Hey, {user.name}</h1>
 
           <Link
-            className="my-4 text-center inline-block w-full sm:w-auto text-base font-medium text-gray-900 hover:text-gray-700"
+            className="text-center inline-block w-full sm:w-auto text-base font-medium text-gray-900 hover:text-gray-700"
             to="mailto:kkharoliya20@gmail.com"
             title="click me to mail"
           >
             Gmail <i className="ri-mail-send-line"></i> : {user.email}
           </Link>
+
         </div>
       </Container>
     </div>

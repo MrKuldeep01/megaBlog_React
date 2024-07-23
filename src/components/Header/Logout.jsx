@@ -2,13 +2,16 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import authService from "../../appwrite/auth_service";
 import { logout } from "../../../store/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Logout = ({className=""}) => {
   const dispatch = useDispatch();
+  const navigat = useNavigate()
   const logoutHandler = () => {
     authService.logout().then((result) => {
       if (result === true) {
         dispatch(logout());
+        navigat('/')
       }
     });
   };

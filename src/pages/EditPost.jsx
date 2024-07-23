@@ -4,7 +4,7 @@ import appwriteService from "../appwrite/DB_service";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditPost = () => {
-  const [post, setPost] = useState([]);
+  const [post, setPost] = useState(null);
   const { slug } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
@@ -25,18 +25,15 @@ const EditPost = () => {
     } else {
       navigate("/");
     }
-  }, [slug, navigate]);
-
-  return (
+  }, [slug]);
+console.log("edit page ");
+  return post && (
     <div className="p-4">
       <Container>
-        {post && (
           <h2 className=" text-center text-slate-900 px-4 py-2 rounded font-semibold text-4xl">
             Edit Post
           </h2>
-        )}
-        {post && <PostForm post={post} />}
-        <PostForm />
+        <PostForm post={post} />
       </Container>
     </div>
   );

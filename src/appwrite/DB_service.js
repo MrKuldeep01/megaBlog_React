@@ -114,7 +114,7 @@ export class dbService {
 
   async getFilePreview(fileId) {
     try {
-      return await this.bucket.getFilePreview(config.appwriteBucket, fileId);
+      return this.bucket.getFilePreview(config.appwriteBucket, fileId);
     } catch (error) {
       console.log(error, "from delete file dbService appwrite");
       return false;

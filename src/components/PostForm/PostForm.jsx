@@ -18,7 +18,6 @@ const PostForm = ({ post }) => {
       },
     });
   const submitHandler = async (data) => {
-
     if (post) {
       const file = (await data.image[0])
         ? appwriteService.uploadFile(data.image[0])
@@ -79,47 +78,71 @@ const PostForm = ({ post }) => {
 
   // -------------------------
 
-  const [postImage, setPostImgae] = useState("");
+  const [postImage, setPostImgae] = useState(null);
   if (post) {
     appwriteService
-      .getFilePreview(post.featuredimage)
+      .getFilePreview(parseInt(post["featuredimage"]))
       .then((url) => {
         if (url) {
           setPostImgae(url.href);
-        } else {
-          console.log("url nhi milra!");
-        }
+        } 
       })
       .catch((err) => {
         console.log(err);
       });
   }
   // ----------
-
+console.log("postform render");
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}
       className="flex-col flex-wrap sm:flex items-center sm:items-start justify-center gap:2 sm:gap-1 relative"
     >
-      <div className="w-full sm:w-2/3 px-2">
-        <Input
-          label="Title :"
-          placeholder="Title"
-          className="mb-4"
-          {...register("title", { required: true })}
-        />
-        <Input
-          label="Slug :"
-          placeholder="Slug"
-          className="mb-4"
-          readOnly
-          {...register("slug", { required: true })}
-          onInput={(e) => {
-            setValue("slug", createSlug(e.currentTarget.value), {
-              shouldValidate: true,
-            });
-          }}
-        />
+      <div className="top w-full flex items-center ">
+        <div className="w-full block sm:inline-block sm:w-2/3 px-2">
+          <Input
+            label="Title :"
+            placeholder="Title"
+            className="mb-4"
+            {...register("title", { required: true })}
+          />
+          <Input
+            label="Slug :"
+            placeholder="Slug"
+            className="mb-4"
+            readOnly
+            {...register("slug", { required: true })}
+            onInput={(e) => {
+              setValue("slug", createSlug(e.currentTarget.value), {
+                shouldValidate: true,
+              });
+            }}
+          />
+        </div>
+        <div className="w-full sm:w-1/3 px-2 ">
+          <Input
+            label="Featured Image :"
+            type="file"
+            className="mb-4"
+            accept="image/png, image/jpg, image/jpeg, image/gif"
+            {...register("image", { required: !post })}
+          />
+          {post && (
+            <div className="w-full mb-4">
+              <img
+                src={postImage || ""}
+                alt={post.title}
+                className="rounded-lg"
+              />
+            </div>
+          )}
+          <SelectBtn
+            options={["active", "inactive"]}
+            label="Status"
+            className="mb-4"
+            {...register("status", { required: true })}
+          />
+        </div>
       </div>
       <div className="editor w-full block">
         <RTE
@@ -128,38 +151,12 @@ const PostForm = ({ post }) => {
           control={control}
           defaultValue={getValues("content")}
         />
-        
       </div>
-      <div className="w-full sm:w-1/3 px-2 sm:absolute top-0 right-0">
-        <Input
-          label="Featured Image :"
-          type="file"
-          className="mb-4"
-          accept="image/png, image/jpg, image/jpeg, image/gif"
-          {...register("image", { required: !post })}
-        />
-        {post && (
-          <div className="w-full mb-4">
-            <img
-              src={postImage || ""}
-              alt={post.title}
-              className="rounded-lg"
-            />
-          </div>
-        )}
-        <SelectBtn
-          options={["active", "inactive"]}
-          label="Status"
-          className="mb-4"
-          {...register("status", { required: true })}
-        />
-      </div>
+
       <Button
         type="submit"
-        bgColor={post ? "bg-green-500" : " bg-black"}
+        bgColor={!post ? "bg-black" : "bg-green-500"}
         className="w-full my-4 duration-200 hover:scale-[1.01]"
-       
-        
       >
         {post ? "Update" : "Submit"}
       </Button>

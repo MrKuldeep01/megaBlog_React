@@ -24,16 +24,18 @@ const Home = () => {
       })
       .catch((err) => setError(err));
   }, []);
+  
+// ===========/////////danger///////////=========
 
-  //  //posts.map((post) => {
-  //  // try {
-  //    // appwriteService.deleteFile(post.slug);
-  //    // appwriteService.deletePost(post.$id);
-  //    // console.log("done everything clear now!")
-  //  // } catch (error) {
-  //    // console.error(error, " in deleting all files");
-  //  // }
-  //  //});
+  // posts.map((post) => {
+  //  try {
+  //  appwriteService.deleteFile(post.slug);
+  //  appwriteService.deletePost(post.$id);
+  //  console.log("done everything clear now!")
+  //  } catch (error) {
+  //  console.error(error, " in deleting all files");
+  //  }})
+  
   
   return (
     <div className="w-full p-4 relative">

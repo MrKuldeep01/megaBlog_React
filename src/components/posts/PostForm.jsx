@@ -40,6 +40,14 @@ const PostForm = ({ post }) => {
   const selectedFile = watch("image")?.[0];
   const [localPreview, setLocalPreview] = useState(null);
 
+  // Slug auto-follows the title until the user edits it directly — an
+  // existing post whose slug was already customized (doesn't match what
+  // auto-derivation from its title would produce) starts "locked" so an
+  // incidental title edit doesn't silently clobber it.
+  const [isSlugCustom, setIsSlugCustom] = useState(
+    () => !!post && post.slug !== createSlug(post.title)
+  );
+
   useEffect(() => {
     if (!selectedFile) {
       setLocalPreview(null);
@@ -52,12 +60,12 @@ const PostForm = ({ post }) => {
 
   useEffect(() => {
     const subscription = watch((value, { name }) => {
-      if (name === "title") {
+      if (name === "title" && !isSlugCustom) {
         setValue("slug", createSlug(value.title), { shouldValidate: true });
       }
     });
     return () => subscription.unsubscribe();
-  }, [watch, setValue]);
+  }, [watch, setValue, isSlugCustom]);
 
   const submitHandler = async (data) => {
     const newImageFile = data.image?.[0] ? await storageService.uploadFile(data.image[0]) : null;
@@ -102,6 +110,7 @@ const PostForm = ({ post }) => {
             error={errors.slug?.message}
             {...register("slug", { required: "Slug is required" })}
             onInput={(e) => {
+              setIsSlugCustom(true);
               setValue("slug", createSlug(e.currentTarget.value), { shouldValidate: true });
             }}
           />
@@ -110,9 +119,7 @@ const PostForm = ({ post }) => {
 
         <aside className="flex flex-col gap-5">
           <div>
-            <span className="inline-block mb-1.5 text-sm font-medium text-slate-700">
-              Featured image <span className="font-normal text-slate-400">(optional)</span>
-            </span>
+            <span className="inline-block mb-1.5 text-sm font-medium text-slate-700">Featured image</span>
             <label
               htmlFor={imageInputId}
               className="group relative flex w-full aspect-video items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 cursor-pointer hover:border-indigo-400 transition-colors"
@@ -138,9 +145,10 @@ const PostForm = ({ post }) => {
                 type="file"
                 className="sr-only"
                 accept="image/png, image/jpg, image/jpeg, image/gif"
-                {...register("image")}
+                {...register("image", { required: !post && "A featured image is required" })}
               />
             </label>
+            {errors.image?.message && <p className="mt-1 text-xs text-red-600">{errors.image.message}</p>}
           </div>
 
           <div>

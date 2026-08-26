@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import parse from "html-react-parser";
-import { Button, Container } from "../components";
+import { Button, Container, ImageFallback } from "../components";
 import { postsService, storageService } from "../api/appwrite";
 import { useAuthStatus } from "../hooks/useAuthStatus";
 import { useFilePreview } from "../hooks/useFilePreview";
@@ -12,7 +12,7 @@ const PostPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { user } = useAuthStatus();
-  const { url: postImage } = useFilePreview(post?.featuredimage);
+  const { url: postImage, status: imageStatus } = useFilePreview(post?.featuredimage);
   const isAuthor = post && user ? post.userid === user.$id : false;
 
   useEffect(() => {
@@ -51,10 +51,14 @@ const PostPage = () => {
     <Container className="max-w-3xl">
       <article className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
         <div className="relative w-full aspect-video bg-slate-100">
-          {postImage && (
+          {imageStatus === "ready" ? (
             <a href={downloadLink || "#"} title="Click to download">
               <img src={postImage} alt={post.title} className="w-full h-full object-cover" />
             </a>
+          ) : imageStatus === "loading" ? (
+            <div className="w-full h-full animate-pulse bg-slate-200" />
+          ) : (
+            <ImageFallback />
           )}
 
           {isAuthor && (

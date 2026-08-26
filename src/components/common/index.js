@@ -4,3 +4,4 @@ export { default as Select } from "./Select";
 export { default as Logo } from "./Logo";
 export { default as Spinner } from "./Spinner";
 export { default as Container } from "./Container";
+export { default as ImageFallback } from "./ImageFallback";

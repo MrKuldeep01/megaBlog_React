@@ -8,8 +8,10 @@ const AllPostsPage = () => {
   const { user } = useAuthStatus();
 
   useEffect(() => {
+    // Explicit empty query — listPosts() defaults to status="active" only,
+    // which would hide the user's own private (inactive) posts here.
     postsService
-      .listPosts()
+      .listPosts([])
       .then((result) => result && setPosts(result.documents))
       .catch((err) => console.log("AllPostsPage: failed to load posts", err));
   }, []);

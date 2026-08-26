@@ -106,11 +106,13 @@ renders nothing rather than redirecting.
   unfiltered by owner. A transient fetch error auto-clears after 3s via
   `useEffect` (previously this used `setTimeout` inside the JSX render body,
   which re-armed a new timer on every re-render — fixed).
-- `AllPostsPage`: also calls `listPosts()`, then client-side filters to
-  `post.userid === user?.$id`. "All Posts" therefore only shows the current
-  user's **active** posts — inactive/private posts aren't fetched or shown
-  anywhere in the UI (unchanged from before; no query variant for the
-  owner's private posts exists yet — worth a follow-up if needed).
+- `AllPostsPage`: calls `listPosts([])` — an explicit empty query array,
+  overriding the default `status="active"` filter — then client-side
+  filters to `post.userid === user?.$id`. This shows the current user's
+  posts of **any** status (private ones render with `PostCard`'s "Private"
+  badge). Previously this called `listPosts()` with no override, which
+  silently applied the active-only default and made private posts invisible
+  even to their own owner.
 - Both render a responsive grid of `PostCard`.
 
 ### Render a single post (`pages/PostPage.jsx`)

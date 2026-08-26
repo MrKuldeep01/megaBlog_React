@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ImageFallback } from "../common";
 import { useFilePreview } from "../../hooks/useFilePreview";
 
 const PostCard = ({ $id, title, featuredimage, status }) => {
@@ -17,7 +18,7 @@ const PostCard = ({ $id, title, featuredimage, status }) => {
           ) : imageState === "loading" ? (
             <div className="w-full h-full animate-pulse bg-slate-200" />
           ) : (
-            <i className="ri-image-line text-3xl text-slate-300"></i>
+            <ImageFallback />
           )}
         </div>
         <div className="p-4">

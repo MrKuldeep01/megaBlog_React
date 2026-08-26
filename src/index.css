@@ -1,3 +1,59 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-slate-900 antialiased;
+  }
+}
+
+/* Typography for parsed post content (TinyMCE HTML, no @tailwindcss/typography dep) */
+.post-content {
+  @apply text-slate-700 leading-relaxed;
+}
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+  @apply font-semibold text-slate-900 mt-6 mb-3;
+}
+.post-content h1 {
+  @apply text-2xl;
+}
+.post-content h2 {
+  @apply text-xl;
+}
+.post-content h3 {
+  @apply text-lg;
+}
+.post-content p {
+  @apply mb-4;
+}
+.post-content a {
+  @apply text-indigo-600 underline underline-offset-2 hover:text-indigo-700;
+}
+.post-content ul {
+  @apply list-disc pl-6 mb-4;
+}
+.post-content ol {
+  @apply list-decimal pl-6 mb-4;
+}
+.post-content img {
+  @apply rounded-lg my-4 max-w-full;
+}
+.post-content blockquote {
+  @apply border-l-2 border-slate-300 pl-4 italic text-slate-600 my-4;
+}
+.post-content pre {
+  @apply bg-slate-900 text-slate-100 rounded-lg p-4 overflow-x-auto my-4 text-sm;
+}
+.post-content code {
+  @apply bg-slate-100 text-slate-800 rounded px-1 py-0.5 text-sm;
+}
+.post-content table {
+  @apply w-full border-collapse my-4 text-sm;
+}
+.post-content th,
+.post-content td {
+  @apply border border-slate-200 px-3 py-2 text-left;
+}

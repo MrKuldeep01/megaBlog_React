@@ -6,7 +6,7 @@ Welcome to **Our Mini Media - Mr Kumar**, a comprehensive media management appli
 
 - **User Signup:** New users can create an account to start using the application.
 - **User Login:** Existing users can log in to access their posts and create new ones.
-- **Post Creation:** Users can create new posts with an image, title, slug, status, and content from a real-time text editor.
+- **Post Creation:** Users can create new posts with a title, slug, status, content from a real-time text editor, and an optional featured image.
 - **Post Editing:** Owners can edit their posts.
 - **Post Deletion:** Owners can delete their posts.
 - **Public Posts:** All users can view public posts.
@@ -15,7 +15,7 @@ Welcome to **Our Mini Media - Mr Kumar**, a comprehensive media management appli
 - **Well-Structured Code:** Code follows best practices for maintainability and readability.
 
 ### Single Post Contains:
-- **Image:** An image to represent the post.
+- **Image (optional):** An image to represent the post.
 - **Title:** The title of the post.
 - **Slug:** A URL-friendly slug generated based on the title.
 - **Status:** The visibility status of the post (private/public).
